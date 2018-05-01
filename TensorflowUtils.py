@@ -24,11 +24,13 @@ def maybe_download_and_extract(dir_path, url_name, is_tarfile=False, is_zipfile=
     filename = url_name.split('/')[-1]
     filepath = os.path.join(dir_path, filename)
     if not os.path.exists(filepath):
-        def _progress(count, block_size, total_size):
+        print("not found!")
+        return
+        """
+        def _progress(count, block_size, total_size):            
             sys.stdout.write(
                 '\r>> Downloading %s %.1f%%' % (filename, float(count * block_size) / float(total_size) * 100.0))
             sys.stdout.flush()
-
         filepath, _ = urllib.request.urlretrieve(url_name, filepath, reporthook=_progress)
         print()
         statinfo = os.stat(filepath)
@@ -39,6 +41,7 @@ def maybe_download_and_extract(dir_path, url_name, is_tarfile=False, is_zipfile=
             with zipfile.ZipFile(filepath) as zf:
                 zip_dir = zf.namelist()[0]
                 zf.extractall(dir_path)
+        """
 
 
 def save_image(image, save_dir, name, mean=None):
